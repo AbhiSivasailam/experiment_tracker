@@ -1,0 +1,66 @@
+<style>
+#pdfplot #controlLine,#pdfplot #testLine{opacity:.95}
+
+#pdfplot #testLine{fill:#A7A8AB}
+
+#pdfplot #controlLine{fill:#56AEB6}
+</style>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Gnana</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Current Experiments</a></li>
+            <li><a href="#">Past Experiments</a></li>
+            <li><a href="#">Create New Experiment</a></li>
+            <li><a href="#">PMFC</a></li>
+            <li><a href="#">User</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <table id="basic" class="table table-striped" style="margin-top:2%;width: 70%" align=center>
+          <thead>
+            <tr>
+              <th>Experiment Name</th>
+              <th>Team</th>
+              <th>Point Person</th>
+              <th>Descripion</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @experiments.each do |exp| %>
+            <tr>
+              <td><%= link_to exp.experiment_name, exp%></td>
+              <td><%= exp.team%></td>
+              <td><%= exp.point_person%></td>
+              <td><%= exp.description%></td>
+              <td><%= exp.status%></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</body>
+<script>
+  $.fn.editable.defaults.mode = 'inline';
+  _.forEach(['#priorAlpha','#priorBeta','#controlSuccesses','#testSuccesses','#controlFailures','#testFailures','#name','#logged_by','#team','#description','#hypothesis','#metric-left'], function(d) {
+    $(d).editable({
+        type: 'text',
+        pk: 1,
+        title: 'Enter'
+    });
+  });
+  $(document).ready(function(){
+    $(window).trigger($.Event('after'))
+  });
+</script>

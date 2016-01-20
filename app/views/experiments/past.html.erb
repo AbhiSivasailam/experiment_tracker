@@ -1,0 +1,72 @@
+<style>
+#pdfplot #controlLine,#pdfplot #testLine{opacity:.95}
+
+#pdfplot #testLine{fill:#A7A8AB}
+
+#pdfplot #controlLine{fill:#56AEB6}
+
+#basic_filter{
+  float: initial;
+  margin-right: 30%;
+  margin-top: 1%;
+}
+</style>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Gnana</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Current Experiments", current_experiments_path %></li>
+            <li><%= link_to "Past Experiments", past_experiments_path %></li>
+            <li><%= link_to "New Experiment", new_experiment_path %></li>
+            <li><a href="https://pmfc.honeybook.com">PMFC</a></li>
+            <li><a href="#">User</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <table id="basic" class="table table-striped" style="margin-top:2%;width: 70%" align=center>
+          <thead>
+            <tr>
+              <th>Experiment Name</th>
+              <th>Team</th>
+              <th>Point Person</th>
+              <th>Descripion</th>
+              <th>Status</th>
+              <th>Outcome</th>
+              <th>Expectation</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @experiments.each do |exp| %>
+            <tr>
+              <td><%= link_to exp.experiment_name, exp%></td>
+              <td><%= exp.team%></td>
+              <td><%= exp.point_person%></td>
+              <td><%= exp.description%></td>
+              <td><%= exp.status%></td>
+              <td><%= exp.outcome%></td>
+              <td><%= exp.expected_val%></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</body>
+<script>
+  $(document).ready(function(){
+    $('#basic').DataTable({
+      paging: false,
+      info: false,
+      response: true
+    })
+  });
+</script>
